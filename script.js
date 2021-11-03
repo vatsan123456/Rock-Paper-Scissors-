@@ -1,6 +1,3 @@
-/**
- * 
- */
 function computerPlay() {
 
 	// These are the choices that the computer can choose from.
@@ -13,10 +10,6 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-
-	// Convert the player's and computer's selection to uppercase, for simplicity in determining winner and loser.
-	playerSelection = playerSelection.toUpperCase();
-	computerSelection = computerSelection.toUpperCase();
 
 	// The result that will be displayed to the user.
 	roundResultMessage = "";
@@ -38,7 +31,7 @@ function playRound(playerSelection, computerSelection) {
 
 	// Check whether player drew.
 	else if (playerSelection == computerSelection) {
-		
+
 		// The user and computer drew the round, the function will have a return value with information that the user drew.
 		roundResult = "drew";
 
@@ -80,18 +73,21 @@ function updateScore(score, roundResult, isUser) {
 }
 
 function getGameResult(userTotalScore, computerTotalScore) {
+
 	// If user won best of 5.
 	if (userTotalScore > computerTotalScore) {
 
 		// Indicate in game result message that user won.
 		gameResultMessage = "You won the game!";
 	}
+
 	// If game was a draw.
 	else if (userTotalScore == computerTotalScore) {
 
 		// Indicate in game result message that user and computer drew.
 		gameResultMessage = "The game is a draw!";
 	}
+
 	// If the above two conditions are not true, then the user lost the game.
 	else {
 
@@ -127,6 +123,17 @@ function game() {
 
 		// Get computer's choice.
 		let computerChoice = computerPlay();
+
+		// Convert the player's and computer's selection to uppercase, for simplicity in determining winner and loser.
+		userChoice = userChoice.toUpperCase();
+		computerChoice = computerChoice.toUpperCase();
+
+		// Verify choice from user is: rock, paper, or scissors, otherwise keep prompting user to input appropriate choice.
+		while (userChoice != "ROCK" && userChoice != "SCISSORS" && userChoice != "PAPER") {
+			
+			// Prompt user for choice and convert it to uppercase, for simplicity with the conditional in this loop, and later ones.
+			userChoice = prompt("Not appropriate choice. Please enter your choice (rock, paper, scissors): ").toUpperCase();
+		}
 
 		// Play the round, function returns round result message.
 		let roundResult = playRound(userChoice, computerChoice);
