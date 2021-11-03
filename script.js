@@ -15,32 +15,42 @@ function playRound(playerSelection, computerSelection) {
 	playerSelection = playerSelection.toUpperCase();
 	computerSelection = computerSelection.toUpperCase();
 
+	// The result that will be displayed to the user.
+	roundResultMessage = "";
+
+	// This result the function will return will be contained in this variable, it wll be a single word: won, lost, or drew.
+	let roundResult = "";
+
 	// Check whether player won.
 	if ((playerSelection == "ROCK" && computerSelection == "SCISSORS")
 		|| (playerSelection == "SCISSORS" && computerSelection == "PAPER")
 		|| (playerSelection == "PAPER" && computerSelection == "ROCK")) {
 
-		// The victory message indicating that the user won.
-		let victoryMessage = "You won! " + playerSelection + " beats " + computerSelection;
+		// Set the message indicating that the user won.
+		roundResultMessage = "You won! " + playerSelection + " beats " + computerSelection;
 
-		return victoryMessage;
+		// The user won the round, the function will have a return value with information that the user won.
+		roundResult = "won";
 	}
 
 	// Check whether player drew.
 	else if (playerSelection == computerSelection) {
 
 		// The draw message indicating that the user drew.
-		let drawMessage = "You drew! " + playerSelection + " ties with " + computerSelection;
+		roundResultMessage = "You drew! " + playerSelection + " ties with " + computerSelection;
 
-		return drawMessage;
+		// The user and computer drew the round, the function will have a return value with information that the user drew.
+		roundResult = "drew";
 	}
+	else {
+		// If neither of the above conditionals are true, then the user lost.
+		// The lose message indicating that the user lost.
+		roundResultMessage = "You lose! " + computerSelection + " beats " + playerSelection;
 
-	// If neither of the conditionals are true, then the user lost.
-
-	// The lose message indicating that the user lost.
-	let loseMessage = "You lose! " + computerSelection + " beats " + playerSelection;
-
-	return loseMessage;
+		roundResult = "lost";
+	}
+	
+	return roundResult;
 }
 
 function updateScore(score, roundResultMessage, isUser) {
