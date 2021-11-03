@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 function computerPlay() {
 
 	// These are the choices that the computer can choose from.
@@ -103,6 +106,10 @@ function game() {
 	// The number of rounds the game will have.
 	const NUMBER_OF_ROUNDS = 5;
 
+	// The former of the 2 constants will be passed to a fn later as an argument for updating user score, and the latter for computer score.
+	const IS_USER = true;
+	const IS_NOT_USER = false;
+
 	// The user's total score.
 	let userTotalScore = 0;
 
@@ -125,8 +132,6 @@ function game() {
 		let roundResult = playRound(userChoice, computerChoice);
 
 		// Update scores of user and computer.
-		const IS_USER = true;
-		const IS_NOT_USER = false;
 		userTotalScore = updateScore(userTotalScore, roundResult, IS_USER);
 		computerTotalScore = updateScore(computerTotalScore, roundResult, IS_NOT_USER);
 	}
