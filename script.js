@@ -12,15 +12,13 @@ function computerPlay() {
 function playRound(playerSelection, computerSelection) {
 
 	// The result that will be displayed to the user.
-	roundResultMessage = "";
+	let roundResultMessage = "";
 
-	// This result the function will return will be contained in this variable, it wll be a single word: won, lost, or drew.
+	// The result that the function will return will be contained in this variable. Either store won, or lost. If draw, the result wlil stay empty.
 	let roundResult = "";
 
-	// Check whether player won.
-	if ((playerSelection == "ROCK" && computerSelection == "SCISSORS")
-		|| (playerSelection == "SCISSORS" && computerSelection == "PAPER")
-		|| (playerSelection == "PAPER" && computerSelection == "ROCK")) {
+	// Check if player won.
+	if ((playerSelection == "ROCK" && computerSelection == "SCISSORS") || (playerSelection == "SCISSORS" && computerSelection == "PAPER") || (playerSelection == "PAPER" && computerSelection == "ROCK")) {
 
 		// The user won the round, the function will have a return value with information that the user won.
 		roundResult = "won";
@@ -29,15 +27,14 @@ function playRound(playerSelection, computerSelection) {
 		roundResultMessage = "You won! " + playerSelection + " beats " + computerSelection;
 	}
 
-	// Check whether player drew.
+	// Check if player drew.
 	else if (playerSelection == computerSelection) {
-
-		// The user and computer drew the round, the function will have a return value with information that the user drew.
-		roundResult = "drew";
 
 		// The draw message indicating that the user drew.
 		roundResultMessage = "You drew! " + playerSelection + " ties with " + computerSelection;
 	}
+
+	// Check if player lost.
 	else {
 
 		// If neither of the above conditionals are true, then the user lost.
@@ -58,21 +55,21 @@ function getGameResult(userTotalScore, computerTotalScore) {
 	// If user won best of 5.
 	if (userTotalScore > computerTotalScore) {
 
-		// Indicate in game result message that user won.
+		// Indicate inside the game result message that the user won.
 		gameResultMessage = "You won the game!";
 	}
 
 	// If game was a draw.
 	else if (userTotalScore == computerTotalScore) {
 
-		// Indicate in game result message that user and computer drew.
+		// Indicate inside the game result message that the user and computer drew.
 		gameResultMessage = "The game is a draw!";
 	}
 
 	// If the above two conditions are not true, then the user lost the game.
 	else {
 
-		// Indicate in game result message that user lost.
+		// Indicate inside the game result message that the user lost.
 		gameResultMessage = "You lost the game!";
 	}
 	return gameResultMessage
@@ -126,6 +123,7 @@ function game() {
 			// Increment user's score by 1.
 			++userTotalScore;
 		} 
+
 		// If computer won.
 		else if (roundResult == "lost") {
 
@@ -133,7 +131,7 @@ function game() {
 			++computerTotalScore;
 		}
 	}
-	
+
 	// Calculate who won the best of 5.
 	gameResultMessage = getGameResult(userTotalScore, computerTotalScore);
 
