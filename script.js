@@ -137,7 +137,7 @@ function game() {
 		let userChoice = getUserChoice();
 
 		// Get computer's choice, and convert computer's selection to uppercase, for simplicity in determining winner and loser.
-		let computerChoice = computerChoice.toUpperCase();		
+		let computerChoice = computerPlay().toUpperCase();		
 
 		// Play the round, function returns round result message.
 		let roundResult = playRound(userChoice, computerChoice);
