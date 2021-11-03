@@ -49,26 +49,21 @@ function playRound(playerSelection, computerSelection) {
 
 		roundResult = "lost";
 	}
-	
+
 	return roundResult;
 }
 
-function updateScore(score, roundResultMessage, isUser) {
-
-	// Get 4th character of the round result message, this will be either "l" or "w": l = user lost, w = user won.
-	const STARTING_INDEX_FOR_RESULT = 4;
-	const ENDING_INDEX_FOR_RESULT = 5;
-	let roundResultCharacter = roundResultMessage.substring(STARTING_INDEX_FOR_RESULT, ENDING_INDEX_FOR_RESULT);
+function updateScore(score, roundResult, isUser) {
 
 	// Determine whether to increment score by 1.
 	// If user won.
-	if (roundResultCharacter == "w" && isUser) {
+	if (roundResult == "won" && isUser) {
 
 		// Add 1 to user's total score.
 		score++;
 	}
 	// If user lost.
-	else if (roundResultCharacter == "l" && !isUser) {
+	else if (roundResult == "lost" && !isUser) {
 
 		// Add 1 to computer's total score.
 		score++;
