@@ -53,25 +53,6 @@ function playRound(playerSelection, computerSelection) {
 	return roundResult;
 }
 
-function updateScore(score, roundResult, isUser) {
-
-	// Determine whether to increment score by 1.
-	// If user won.
-	if (roundResult == "won" && isUser) {
-
-		// Add 1 to user's total score.
-		score++;
-	}
-	// If user lost.
-	else if (roundResult == "lost" && !isUser) {
-
-		// Add 1 to computer's total score.
-		score++;
-	}
-	// If the two above conditions are not true, then user and computer drew, no need to do anything.
-	return score;
-}
-
 function getGameResult(userTotalScore, computerTotalScore) {
 
 	// If user won best of 5.
@@ -117,10 +98,6 @@ function game() {
 	// The number of rounds the game will have.
 	const NUMBER_OF_ROUNDS = 5;
 
-	// The former of the 2 constants will be passed to a fn later as an argument for updating user score, and the latter for computer score.
-	const IS_USER = true;
-	const IS_NOT_USER = false;
-
 	// The user's total score.
 	let userTotalScore = 0;
 
@@ -143,9 +120,20 @@ function game() {
 		let roundResult = playRound(userChoice, computerChoice);
 
 		// Update scores of user and computer.
-		userTotalScore = updateScore(userTotalScore, roundResult, IS_USER);
-		computerTotalScore = updateScore(computerTotalScore, roundResult, IS_NOT_USER);
+		// If user won.
+		if (roundResult == "won") {
+
+			// Increment user's score by 1.
+			++userTotalScore;
+		} 
+		// If computer won.
+		else if (roundResult == "lost") {
+
+			// Increment computer's score by 1.
+			++computerTotalScore;
+		}
 	}
+	
 	// Calculate who won the best of 5.
 	gameResultMessage = getGameResult(userTotalScore, computerTotalScore);
 
