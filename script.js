@@ -37,3 +37,7 @@ function playRound(playerSelection, computerSelection) {
 	
 	return loseMessage;
 }
+
+function game() {
+	
+}
