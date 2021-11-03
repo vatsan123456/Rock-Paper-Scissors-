@@ -26,29 +26,33 @@ function playRound(playerSelection, computerSelection) {
 		|| (playerSelection == "SCISSORS" && computerSelection == "PAPER")
 		|| (playerSelection == "PAPER" && computerSelection == "ROCK")) {
 
-		// Set the message indicating that the user won.
-		roundResultMessage = "You won! " + playerSelection + " beats " + computerSelection;
-
 		// The user won the round, the function will have a return value with information that the user won.
 		roundResult = "won";
+
+		// Set the message indicating that the user won.
+		roundResultMessage = "You won! " + playerSelection + " beats " + computerSelection;
 	}
 
 	// Check whether player drew.
 	else if (playerSelection == computerSelection) {
+		
+		// The user and computer drew the round, the function will have a return value with information that the user drew.
+		roundResult = "drew";
 
 		// The draw message indicating that the user drew.
 		roundResultMessage = "You drew! " + playerSelection + " ties with " + computerSelection;
-
-		// The user and computer drew the round, the function will have a return value with information that the user drew.
-		roundResult = "drew";
 	}
 	else {
+
 		// If neither of the above conditionals are true, then the user lost.
+		roundResult = "lost";
+
 		// The lose message indicating that the user lost.
 		roundResultMessage = "You lose! " + computerSelection + " beats " + playerSelection;
-
-		roundResult = "lost";
 	}
+
+	// Display to user the round result messsage.
+	console.log(roundResultMessage);
 
 	return roundResult;
 }
@@ -118,16 +122,13 @@ function game() {
 		let computerChoice = computerPlay();
 
 		// Play the round, function returns round result message.
-		let roundResultMessage = playRound(userChoice, computerChoice);
-
-		// Display the results of the round.
-		console.log(roundResultMessage);
+		let roundResult = playRound(userChoice, computerChoice);
 
 		// Update scores of user and computer.
 		const IS_USER = true;
 		const IS_NOT_USER = false;
-		userTotalScore = updateScore(userTotalScore, roundResultMessage, IS_USER);
-		computerTotalScore = updateScore(computerTotalScore, roundResultMessage, IS_NOT_USER);
+		userTotalScore = updateScore(userTotalScore, roundResult, IS_USER);
+		computerTotalScore = updateScore(computerTotalScore, roundResult, IS_NOT_USER);
 	}
 	// Calculate who won the best of 5.
 	gameResultMessage = getGameResult(userTotalScore, computerTotalScore);
