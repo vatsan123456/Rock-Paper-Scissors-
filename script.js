@@ -97,6 +97,21 @@ function getGameResult(userTotalScore, computerTotalScore) {
 	return gameResultMessage
 }
 
+function getUserChoice() {
+
+	// Prompt user for choice and convert it to uppercase, for simplicity with later conditionals.
+	let userChoice = prompt("Enter your choice (rock, paper, scissors): ").toUpperCase();
+
+	// Verify choice from user is: rock, paper, or scissors, otherwise keep prompting user to input appropriate choice.
+	while (userChoice != "ROCK" && userChoice != "SCISSORS" && userChoice != "PAPER") {
+
+		// Prompt user for choice and convert it to uppercase, for simplicity with the conditional in this loop, and later ones.
+		userChoice = prompt("Not appropriate choice. Please enter your choice (rock, paper, scissors): ").toUpperCase();
+	}
+
+	return userChoice;
+}
+
 function game() {
 
 	// The number of rounds the game will have.
@@ -118,22 +133,11 @@ function game() {
 	// Play for 5 rounds
 	for (let roundNumber = 1; roundNumber <= NUMBER_OF_ROUNDS; ++roundNumber) {
 
-		// Before playing each round, get choice from user.
-		let userChoice = prompt("Enter your choice (rock, paper, scissors): ");
+		// Get user's choice.
+		let userChoice = getUserChoice();
 
-		// Get computer's choice.
-		let computerChoice = computerPlay();
-
-		// Convert the player's and computer's selection to uppercase, for simplicity in determining winner and loser.
-		userChoice = userChoice.toUpperCase();
-		computerChoice = computerChoice.toUpperCase();
-
-		// Verify choice from user is: rock, paper, or scissors, otherwise keep prompting user to input appropriate choice.
-		while (userChoice != "ROCK" && userChoice != "SCISSORS" && userChoice != "PAPER") {
-			
-			// Prompt user for choice and convert it to uppercase, for simplicity with the conditional in this loop, and later ones.
-			userChoice = prompt("Not appropriate choice. Please enter your choice (rock, paper, scissors): ").toUpperCase();
-		}
+		// Get computer's choice, and convert computer's selection to uppercase, for simplicity in determining winner and loser.
+		let computerChoice = computerChoice.toUpperCase();		
 
 		// Play the round, function returns round result message.
 		let roundResult = playRound(userChoice, computerChoice);
