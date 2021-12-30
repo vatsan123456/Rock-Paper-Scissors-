@@ -1,0 +1,88 @@
+* {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+#ROCK {
+    color: white;
+}
+
+#PAPER {
+    color: white;
+}
+
+#SCISSORS {
+    color: white;
+}
+
+#ROCK, #PAPER, #SCISSORS {
+    font-size: 30px;
+    padding: 2em;
+}
+#ROCK:hover, #PAPER:hover, #SCISSORS:hover {
+    font-size: 31px;
+}
+#ROCK:hover, #PAPER:hover, #SCISSORS:hover, .footer:hover,#user-icon:hover, #computer-icon:hover, .nav:hover  {
+    background-color: rgb(48, 46, 46);
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px white;
+
+}
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    gap: 2em;
+}
+
+.nav {
+    font-style: italic;
+    margin: 1em;
+    box-shadow: 3px 3px white;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding: 1em;
+    border-radius: 1px;
+    color: white;
+    background-color: black;
+}
+.container {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1em;
+}
+.score-container {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    color: white;
+}
+.icon-container {
+    box-sizing: content-box;
+    display: flex;
+    gap: 5em;
+    justify-content: center;
+    color: white;
+    font-size: 50px;
+}
+span {border: 1px solid white;}
+span:hover {
+    cursor: pointer;
+    background-color: rgb(48, 46, 46);
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px white;
+}
+.footer {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: black;
+    gap: 3em;
+    padding: 1em;
+    border-radius: 1px;
+    font-size: 20px;
+}

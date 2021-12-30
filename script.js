@@ -24,14 +24,18 @@ function playRound(playerSelection, computerSelection) {
 		roundResult = "won";
 
 		// Set the message indicating that the user won.
-		roundResultMessage = "You won! " + playerSelection + " beats " + computerSelection;
+		roundResultMessage = "You won this round! " + playerSelection + " beats " + computerSelection;
+
+		carrotIcon.textContent = ">";
 	}
 
 	// Check if player drew.
 	else if (playerSelection == computerSelection) {
 
 		// The draw message indicating that the user drew.
-		roundResultMessage = "You drew! " + playerSelection + " ties with " + computerSelection;
+		roundResultMessage = "You drew this round! " + playerSelection + " ties with " + computerSelection;
+
+		carrotIcon.textContent = "=";
 	}
 
 	// Check if player lost.
@@ -41,11 +45,19 @@ function playRound(playerSelection, computerSelection) {
 		roundResult = "lost";
 
 		// The lose message indicating that the user lost.
-		roundResultMessage = "You lose! " + computerSelection + " beats " + playerSelection;
-	}
+		roundResultMessage = "You lose this round! " + computerSelection + " beats " + playerSelection;
 
-	// Display to user the round result messsage.
-	console.log(roundResultMessage);
+		carrotIcon.textContent = "<";
+	}
+	
+	const iconDict = { ROCK : "🪨", PAPER : "📜", SCISSORS : "✂️"};
+
+	// Display user's choice and computer's choice
+	userIcon.textContent = iconDict[playerSelection];
+	computerIcon.textContent = iconDict[computerSelection];
+
+	// Display to user the round result messsage...
+	div.textContent = "Result: " + roundResultMessage;
 
 	return roundResult;
 }
@@ -75,67 +87,75 @@ function getGameResult(userTotalScore, computerTotalScore) {
 	return gameResultMessage
 }
 
-function getUserChoice() {
+// Query select relevant elements
+const buttons = document.querySelectorAll('span');
+const body = document.querySelector('body');
+const div = document.querySelector('#round-result');
+const userScoreDiv = document.querySelector('#user-score');
+const computerScoreDiv = document.querySelector('#computer-score');
+const roundNumberDiv = document.querySelector('#round-number')
+const userIcon = document.querySelector('#user-icon');
+const computerIcon = document.querySelector('#computer-icon');
+const carrotIcon = document.querySelector('#carrot-icon');
 
-	// Prompt user for choice and convert it to uppercase, for simplicity with later conditionals.
-	let userChoice = prompt("Enter your choice (rock, paper, scissors): ").toUpperCase();
-
-	// Verify choice from user is: rock, paper, or scissors, otherwise keep prompting user to input appropriate choice.
-	while (userChoice != "ROCK" && userChoice != "SCISSORS" && userChoice != "PAPER") {
-
-		// Prompt user for choice and convert it to uppercase, for simplicity with the conditional in this loop, and later ones.
-		userChoice = prompt("Not appropriate choice. Please enter your choice (rock, paper, scissors): ").toUpperCase();
-	}
-
-	return userChoice;
-}
-
-function game() {
-
-	// The number of rounds the game will have.
-	const NUMBER_OF_ROUNDS = 5;
-
+function startGame() {
 	// The user's total score.
 	let userTotalScore = 0;
 
 	// The computer's total score.
 	let computerTotalScore = 0;
 
-	// The message containing who won the game.
-	let gameResultMessage = "";
+	// Keep track of how many times the button is pressed.
+	buttonClickCounter = 0;
 
-	// Play for 5 rounds
-	for (let roundNumber = 1; roundNumber <= NUMBER_OF_ROUNDS; ++roundNumber) {
+	// Number of rounds in the game.
+	const NUMBER_OF_ROUNDS = 5;
 
-		// Get user's choice.
-		let userChoice = getUserChoice();
+	// Set text content for relevant divs
+	userIcon.textContent = '?';
+	computerIcon.textContent = '?';
+	roundNumberDiv.textContent = `Round 1: `;
+	userScoreDiv.textContent = "User score: 0";
+	computerScoreDiv.textContent = "Computer score: 0";
+	
+	div.textContent = "Result: ";
+	buttons.forEach((button) => {
+		button.addEventListener('click', function (e) {
+			if (buttonClickCounter == NUMBER_OF_ROUNDS) return;
+			
+			roundNumberDiv.textContent = `Round ${buttonClickCounter+1}.`;
 
-		// Get computer's choice, and convert computer's selection to uppercase, for simplicity in determining winner and loser.
-		let computerChoice = computerPlay().toUpperCase();		
+			roundResult = playRound(e.target.id, computerPlay().toUpperCase());
+			buttonClickCounter += 1;
 
-		// Play the round, function returns round result message.
-		let roundResult = playRound(userChoice, computerChoice);
+			// If user won.
+			if (roundResult == "won") {
+				++userTotalScore;
+				userScoreDiv.textContent = "User score: " + userTotalScore;
+			}
 
-		// Update scores of user and computer.
-		// If user won.
-		if (roundResult == "won") {
+			// If computer won.
+			else if (roundResult == "lost") {
+				++computerTotalScore;
+				computerScoreDiv.textContent = "Computer score: " + computerTotalScore;
+			}
+			else buttonClickCounter = buttonClickCounter-1;
+			if (buttonClickCounter == NUMBER_OF_ROUNDS) {
+				// The message containing who won the game.
+				let gameResultMessage = getGameResult(userTotalScore, computerTotalScore);
+				div.textContent += "\r\n. " + gameResultMessage;
+				// Game is over, create play again button.
+				const playagainbutton = document.createElement('span');
+				playagainbutton.textContent = "Play again.";
+				playagainbutton.style.color = 'white';
+				playagainbutton.style.margin = 'auto';
+				playagainbutton.style.padding = '3em';
+				body.appendChild(playagainbutton);
+				playagainbutton.addEventListener('click', () => window.location.reload());
+			}
+		})
 
-			// Increment user's score by 1.
-			++userTotalScore;
-		} 
-
-		// If computer won.
-		else if (roundResult == "lost") {
-
-			// Increment computer's score by 1.
-			++computerTotalScore;
-		}
-	}
-
-	// Calculate who won the best of 5.
-	gameResultMessage = getGameResult(userTotalScore, computerTotalScore);
-
-	// Display to the user the result.
-	console.log(gameResultMessage);
+	})
 }
-game();
+
+startGame();
