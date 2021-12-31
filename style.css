@@ -1,20 +1,8 @@
 * {
     font-family: 'Segoe UI', 'Roboto', sans-serif;
 }
-
-#ROCK {
-    color: white;
-}
-
-#PAPER {
-    color: white;
-}
-
-#SCISSORS {
-    color: white;
-}
-
 #ROCK, #PAPER, #SCISSORS {
+    color: white;
     font-size: 30px;
     padding: 2em;
 }
@@ -33,9 +21,7 @@ body {
     background-color: black;
     gap: 2em;
 }
-
 .nav {
-    font-style: italic;
     margin: 1em;
     box-shadow: 3px 3px white;
     display: flex;
@@ -69,7 +55,9 @@ body {
     color: white;
     font-size: 50px;
 }
-span {border: 1px solid white;}
+span {
+    border: 1px solid white;
+}
 span:hover {
     cursor: pointer;
     background-color: rgb(48, 46, 46);
