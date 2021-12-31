@@ -49,8 +49,8 @@ function playRound(playerSelection, computerSelection) {
 
 		carrotIcon.textContent = "<";
 	}
-	
-	const iconDict = { ROCK : "🪨", PAPER : "📜", SCISSORS : "✂️"};
+
+	const iconDict = { ROCK: "🪨", PAPER: "📜", SCISSORS: "✂️" };
 
 	// Display user's choice and computer's choice
 	userIcon.textContent = iconDict[playerSelection];
@@ -117,13 +117,13 @@ function startGame() {
 	roundNumberDiv.textContent = `Round 1: `;
 	userScoreDiv.textContent = "User score: 0";
 	computerScoreDiv.textContent = "Computer score: 0";
-	
+
 	div.textContent = "Result: ";
 	buttons.forEach((button) => {
 		button.addEventListener('click', function (e) {
-			if (buttonClickCounter == NUMBER_OF_ROUNDS) return;
-			
-			roundNumberDiv.textContent = `Round ${buttonClickCounter+1}.`;
+			if (userTotalScore == 5 || computerTotalScore == 5) return;
+
+			roundNumberDiv.textContent = `Round ${buttonClickCounter + 1}.`;
 
 			roundResult = playRound(e.target.id, computerPlay().toUpperCase());
 			buttonClickCounter += 1;
@@ -139,8 +139,8 @@ function startGame() {
 				++computerTotalScore;
 				computerScoreDiv.textContent = "Computer score: " + computerTotalScore;
 			}
-			else buttonClickCounter = buttonClickCounter-1;
-			if (buttonClickCounter == NUMBER_OF_ROUNDS) {
+			else buttonClickCounter = buttonClickCounter - 1;
+			if (userTotalScore == 5 || computerTotalScore == 5) {
 				// The message containing who won the game.
 				let gameResultMessage = getGameResult(userTotalScore, computerTotalScore);
 				div.textContent += "\r\n. " + gameResultMessage;
